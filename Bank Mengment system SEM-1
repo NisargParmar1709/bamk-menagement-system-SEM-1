@@ -1,0 +1,510 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<time.h>
+#include<string.h>
+#include<unistd.h>
+#include<windows.h>
+
+void choise_function();
+void user_first();
+void user_second();
+int user_detail1();
+int user_detail2();
+int main_code(char id[15], char pass[15]);
+
+int main()
+{	
+ 	static char id[15], pass[15];
+	static int i1, i2;
+
+	rep_id:
+	printf("Enter the id : ");
+	gets(id);
+		
+	rep_pass:
+	printf("Enter the password : ");
+	gets(pass);
+	
+	getch();
+	system("cls");
+	
+	if(strcmp(id,"123") == 0){
+	
+		if(strcmp(pass, "123") == 0){
+			
+			printf("Login...");
+			sleep(4);	
+			getch(); 
+			system("cls");
+			
+			i1 = 0; 
+			i2 = 1;
+			main_code(id, pass);
+		}
+		
+		else{
+			printf("\nYour password is worng \nTry again");
+			getch();
+			goto rep_pass;
+		}
+		
+	}
+		
+	else if(strcmp(id, "1234") == 0){
+		
+		if(strcmp(pass, "1234") == 0){
+			
+			printf("Login...");
+			sleep(4);	
+			getch(); 
+			system("cls");
+			
+			i1 = 1;
+			i2 = 0;
+			main_code(id, pass);
+		}
+		
+		else{
+			printf("\nYour password is worng \nTry again");
+			getch();
+			goto rep_pass;
+		}
+	}
+		
+	else{
+		
+		printf("\a\a\a\nYour id is wrong \n Plz Try again...");
+		getch();
+		system("cls");
+		goto rep_id;
+			
+	}
+	
+	return 0;
+	
+}
+
+int main_code(char id[15], char pass[15]){
+		
+	int ch, loan_ch;
+	float dipo_amo[5], balance[5] = { 2000,2000,2000,2000,2000 }, with_amo[5], tran_amo[5]; 
+	char tran_userid[10];
+	int per_time_month[5], home_time_month[5], veh_time_month[5], gold_time_month[5];
+	float EMI[5];
+	float per_loan_amo[5], home_loan_amo[5], veh_loan_amo[5], gold_loan_amo[5];
+	float per_intrest[5] = { 9.80, 9.80, 9.80, 9.80, 9.80 };
+	float home_intrest[5] = { 9.80, 9.80, 9.80, 9.80, 9.80 };
+	float veh_intrest[5] = { 9.80, 9.80, 9.80, 9.80, 9.80 };
+	float gold_intrest[5] = { 9.80, 9.80, 9.80, 9.80, 9.80 };
+	int per_loan[5] = { 0, 0, 0, 0, 0 }, home_loan[5] = { 0, 0, 0, 0, 0 }, veh_loan[5] = { 0, 0, 0, 0, 0 }, gold_loan[5] = { 0, 0, 0, 0, 0 }; 
+	float fd_amo[5], fd_time[5], total_fd_amo[5]; 
+	int i, tran_user_count = 1;
+	static int i1, i2;
+	
+			rep_detail:
+			if(strcmp(id,"123") == 0){
+				
+				if(strcmp(pass,"123") == 0){
+	
+					i1 = 0;
+					i2 = 1;
+					user_first();
+					printf("\n Balance : %.2fRs",balance[i1]);
+					printf("\n--------------------------------------------------------------------------------");
+				}
+				
+				else{
+					printf("\nYour password is worng \nTry again");
+					getch();
+					system("cls");
+					goto rep_pass;
+				}
+			}
+			
+			else if(strcmp(id,"1234") == 0){
+				
+				if(strcmp(pass,"1234") == 0){
+			
+					i1 = 1;
+					i2 = 0;
+					user_second();
+					printf("\n Balance : %.2fRs",balance[i1]);
+					printf("\n--------------------------------------------------------------------------------");
+				}
+				
+				else{
+					printf("\nYour password is worng \nTry again");
+					getch();
+					system("cls");
+					goto rep_pass;
+				}
+			}
+			
+			else{
+				printf("This type of id was not exiset.");
+				goto rep_id;
+			}
+			
+			if(per_loan[i1] == 1 ){
+				printf("\n\nYour Personal loan amount is %.2f with %.2f rate for %d months", per_loan_amo[i1], per_intrest[i1], per_time_month[i1]);
+			}
+			
+    		else if(home_loan[i1] == 1 ){
+				printf("\n\nYour Home loan amount is %.2f with %.2f rate for %d months", home_loan_amo[i1], home_intrest[i1], home_time_month[i1]);
+			}
+			
+			else if(per_loan[i1] == 1 ){
+				printf("\n\nYour Vehical loan amount is %.2f with %.2f rate for %d months", veh_loan_amo[i1], veh_intrest[i1], veh_time_month[i1]);
+			}
+			
+			else if(per_loan[i1] == 1 ){
+				printf("\n\nYour gold loan amount is %.2f with %.2f rate for %d months", gold_loan_amo[i1], gold_intrest[i1], gold_time_month[i1]);
+			}
+			
+			// Choise option for function of bank 
+			choise_function();
+			
+			printf("\n\n\t\t\t\tEnter your choise : ");
+			scanf("%d",&ch);
+			system("cls");
+			
+			switch(ch){
+				
+					// Deposit code block
+				case 1: 
+					printf("\n\n\t\t\t=====================================");
+					printf("\n\t\t\t\t   DEPOSIT SECTION ");
+					printf("\n\t\t\t=====================================");
+					
+					printf("\n\n\t\t\t\tEnter Diposit amount : ");
+					scanf("%f",&dipo_amo[i1]);
+					
+					printf("\n\t\t\t\tDeposit amount is %.2fRs",dipo_amo[i1]);
+					balance[i1] = balance[i1] + dipo_amo[i1];
+					getch();
+					system("cls");
+					goto rep_detail;
+					
+					// withdraw code block 	
+				case 2 : 
+					rep_with_amo:
+					printf("\n\n\t\t\t=====================================");
+					printf("\n\t\t\t\t   WITHDEAW SECTION ");
+					printf("\n\t\t\t=====================================");
+					
+					printf("\n\n\t\t\t\tEnter withdraw amount : ");
+					scanf("%f",&with_amo[i1]);
+					
+					// For withdraw amount is grather then balnace 
+					if(with_amo[i1]>balance[i1]){
+						printf("\n\n\t\tYour balance is less then your withdraw amount : ");
+						getch();
+						system("cls");
+						goto rep_with_amo;
+					}
+					
+					printf("\n\t\t\t\tWithderaw amount is %.2fRs",with_amo[i1]);
+					balance[i1] = balance[i1] - with_amo[i1];
+					getch();
+					system("cls");
+					goto rep_detail;
+					
+					// transfer code block 
+					rep_tran_amo:
+				case 3 : 
+					printf("\n\n\t\t\t=====================================");
+					printf("\n\t\t\t\t   TRANSFER  SECTION ");
+					printf("\n\t\t\t=====================================");
+					
+					printf("\n\n\t\t\t\tEnter Transfer amount : ");
+					scanf("%f",&tran_amo[i1]);
+					
+					if(tran_amo[i1]>balance[i1]){
+						printf("\n\n\t\tYour balance is less then your transfer amount : ");
+						getch();
+						system("cls");
+						goto rep_tran_amo;
+					}
+					
+					printf("\n\t\t\t\tTransfer amount is %.2fRs",tran_amo[i1]);
+					getch();
+					
+					rep_tran_id:
+					printf("\n\t\t\tEnter user id of the use for transfer amount : ");
+					gets(tran_userid);
+						
+					if(strcmp(tran_userid, "1234") == 0){
+						
+						balance[i1] = balance[i1] - tran_amo[i1];
+						balance[i2] = balance[i2] + tran_amo[i1];
+						printf("\nTransfering...");
+						sleep(2);
+						printf("\tTransfer succesful");
+						sleep(2);
+						getch();
+						system("cls");
+						goto rep_detail;
+					}
+					
+					else if(strcmp(tran_userid, "123") == 0){
+						
+						balance[i1] = balance[i1] - tran_amo[i1];
+						balance[i2] = balance[i2] + tran_amo[i1];
+						printf("\nTransfering...");
+						sleep(2);
+						printf("\tTransfer succesful");
+						sleep(2);
+						getch();
+						system("cls");
+						goto rep_detail;
+					
+					}
+					
+					else{
+						printf("\n\t\t\tThis type of id is not existed \n\t\t\t Try again ");
+						getch();
+						system("cls");
+						goto rep_tran_id;
+					}
+					
+					// Money transection detail
+				case 4 :
+					
+					printf("\n\n\t\t\t=====================================");
+					printf("\n\t\t\t       MONEY TRANSECTION SECTION ");
+					printf("\n\t\t\t=====================================");
+					
+					printf("\n\n\t\t\t===================================");
+					printf("\n\n\t\t\t Diposit 4000.00Rs at 12 : 00 : 00 ");
+					printf("\n\n\t\t\t===================================");
+					
+					getch();
+					sleep(2);
+					system("cls");
+					goto rep_detail;
+					
+					// Fix deposit
+				case 5 : 
+					
+					printf("\n\n\t\t\t=====================================");
+					printf("\n\t\t\t       FIX DEPOSIT SECTION ");
+					printf("\n\t\t\t=====================================");
+					
+					printf("\n\n\t\t\tEnter the FD amount : ");
+					scanf("%f",&fd_amo[i1]);
+					
+					printf("\n\n\t\t\tEnter the time period of FD in months : ");
+					scanf("%d",&fd_time[i1]);
+					
+					total_fd_amo[i1] = ( fd_amo[i1] * fd_time[i1] ) / 10.3;
+
+					printf("\n\t\t\tYour FD amount is %f for %f time",fd_amo[i1], fd_time[i1]);
+					printf("\n\n\t\t\tTotal FD is %f",total_fd_amo);
+						
+					getch();
+					sleep(2);
+					system("cls");
+					goto rep_detail;	
+						
+					// Loan block 
+				case 6 : 
+				
+					rep_loan_ch: 
+					printf("\n\n\t\t\t=====================================");
+					printf("\n\t\t\t\t      LOAN SECTION ");
+					printf("\n\t\t\t=====================================");
+					
+					printf("\n\n\t\t\t\t 1. personal loan :");
+					printf("\n\t\t\t\t 2. Home loan :");
+					printf("\n\t\t\t\t 3. Vehical loan :");
+					printf("\n\t\t\t\t 4. Gold loan :");
+					
+					printf("\n\n\t\t\t\t Enter your loan choise : ");
+					scanf("%d",&loan_ch);
+					getch();
+					system("cls");
+					
+					switch(loan_ch){
+						
+							// personal loan 
+						case 1 : 
+							
+							printf("\n\n\t\t\t=====================================");
+							printf("\n\t\t\t\t    PERSONAL LOAN  ");
+							printf("\n\t\t\t=====================================");
+							
+							printf("\n\n\t\t\tEnter principal amount : ");
+							scanf("%f",&per_loan_amo[i1]);
+							
+							printf("\n\t\t\tEnter installment time in month : ");
+							scanf("%d",&per_time_month[i1]);
+							
+							EMI[i1] = (per_loan_amo[i1]*per_time_month[i1]*per_time_month[i1])/100;
+							printf("\n\t\t\tTotal EMI is %f", EMI[i1]);
+							
+							balance[i1] = balance[i1] + per_loan_amo[i1];
+							per_loan[i1]++;
+							getch();
+							system("cls");
+							goto rep_detail;
+							
+							// home loan 
+						case 2 : 
+							
+							printf("\n\n\t\t\t=====================================");
+							printf("\n\t\t\t\t    HOME LOAN  ");
+							printf("\n\t\t\t=====================================");
+							
+							printf("\n\n\t\t\tEnter principal amount : ");
+							scanf("%f",&home_loan_amo[i1]);
+							
+							printf("\n\t\t\tEnter installment time in month : ");
+							scanf("%d",&home_time_month[i1]);
+							
+							EMI[i1] = (home_loan_amo[i1]*home_time_month[i1]*home_time_month[i1])/100;
+							printf("\n\t\t\tTotal EMI is %f", EMI[i1]);
+							
+							balance[i1] = balance[i1] + home_loan_amo[i1];
+							home_loan[i1]++;
+							getch();
+							system("cls");
+							goto rep_detail;
+							
+							// vehical loan 
+						case 3 : 
+							
+							printf("\n\n\t\t\t=====================================");
+							printf("\n\t\t\t\t     VEHICAL LOAN  ");
+							printf("\n\t\t\t=====================================");
+							
+							printf("\n\n\t\t\tEnter principal amount : ");
+							scanf("%f",&veh_loan_amo[i1]);
+							
+							printf("\n\t\t\tEnter installment time in month : ");
+							scanf("%d",&veh_time_month[i1]);
+							
+							EMI[i1] = (veh_loan_amo[i1]*veh_time_month[i1]*veh_time_month[i1])/100;
+							printf("\n\t\t\tTotal EMI is %f", EMI[i1]);
+							
+							balance[i1] = balance[i1] + veh_loan_amo[i1];
+							veh_loan[i1]++;
+							getch();
+							system("cls");
+							goto rep_detail;
+						
+							// gold loan 	
+						case 4 : 
+							
+							printf("\n\n\t\t\t=====================================");
+							printf("\n\t\t\t\t    GOLD LOAN  ");
+							printf("\n\t\t\t=====================================");
+							
+							printf("\n\n\t\t\tEnter principal amount : ");
+							scanf("%f",&gold_loan_amo[i1]);
+							
+							printf("\n\t\t\tEnter installment time in month : ");
+							scanf("%d",&gold_time_month[i1]);
+							
+							EMI[i1] = (gold_loan_amo[i1]*gold_time_month[i1]*gold_time_month[i1])/100;
+							printf("\n\t\t\tTotal EMI is %f", EMI[i1]);
+							
+							balance[i1] = balance[i1] + gold_loan_amo[i1];
+							gold_loan[i1]++;
+							getch();
+							system("cls");
+							goto rep_detail;
+							
+						default : 
+								
+							printf("\n\n\t\t\tEnvalid choise. ");
+							getch();
+							system("cls");
+							goto rep_loan_ch;
+					}
+					
+					break;		
+					
+					// User detail1 code block
+				case 7 : 
+					
+					user_detail1();
+					printf("\n\nPress Enter to go main manu : ");
+					getch();
+					system("cls");
+					goto rep_detail;
+					
+					// log out code block
+				case 8 :
+					
+					getch();
+					system("cls");
+					
+					rep_id: 
+					printf("\nEnter the id : ");
+					gets(id);
+	
+					rep_pass:
+					printf("\nEnter the password : ");
+					gets(pass);
+					
+					system("cls");
+					goto rep_detail;
+					
+					// exit code block	
+				case 9 : 
+					break;
+					
+					// default code block 
+				default :
+					printf("\nInvalid choise : ");
+				break;	
+			}
+		return 1;
+	}
+
+int  user_detail1()
+{
+	printf("\n\n================================================================================");
+	printf("\n\n Name of A/C Holder : Nisarg parmar  \n\n Account No. 1709Nispar \t Mobile No. 9990987654");
+	printf("\n\n Date of barth : 17/09/2007 \t Email id : nisargmparma1709@gmail.com ");
+	printf("\n\n State : Gujarat \t District : Jamnagar ");
+	printf("\n\n Name of Bank : STATE BANK OF INDIA  \n\n Branch : Gulabnagar \t Branch Code No. : 07");
+	printf("\n\n IFSC/BCI No. : 137j5op34");
+	
+	return 0;
+}
+
+void choise_function()
+{
+	printf("\n\n\t\t\t\t1. Deposit :  ");
+ 	printf("\n\t\t\t\t2. Withdraw : ");
+	printf("\n\t\t\t\t3. Transfer : ");
+	printf("\n\t\t\t\t4. Money Trancetion detail : ");
+	printf("\n\t\t\t\t5. Fix diposit (FD) : ");
+	printf("\n\t\t\t\t6. Loan : ");
+	printf("\n\t\t\t\t7. User Detail : ");
+	printf("\n\t\t\t\t8. Logout : ");
+	printf("\n\t\t\t\t9. Exit : ");
+		
+}
+
+void user_first(){
+	
+	printf("\n--------------------------------------------------------------------------------");
+	printf("\n Hello ");
+	printf("\n Mr. Parmar Nisarg ");
+	printf("\n Account No. : 1709Nispar     U.I.D No. : 1F23e4jf ");
+	printf("\n Bank : State Bank of India	Branch : Gulabnagar    Area code : 07 ");
+
+				
+}
+
+void user_second(){
+	
+	printf("\n--------------------------------------------------------------------------------");
+	printf("\n Hello ");
+	printf("\n Mr. Parmar Manoj ");
+	printf("\n Account No. : 2401Manpar     U.I.D No. : 1G23e4Gf ");
+	printf("\n Bank : State Bank of India	Branch : Gulabnagar    Area code : 07 ");
+}
